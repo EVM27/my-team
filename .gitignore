@@ -1,0 +1,19 @@
+
+   node_modules/
+   npm-debug.log
+   yarn-error.log
+
+   # Директории сборки
+   dist/
+   build/
+
+   # Логи
+   *.log
+
+   # Операционные системы
+   .DS_Store
+   Thumbs.db
+
+   # Конфигурационные файлы IDE
+   .idea/
+   .vscode/
