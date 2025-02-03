@@ -1,23 +1,20 @@
-
-class Member {
-    constructor(name, role) {
-        this.name = name;
-        this.role = role;
-    }
-}
-
 class Team {
     constructor() {
-        this.members = [];
+        this.members = new Set();
     }
 
-    addMember(member) {
-        this.members.push(member);
+    add(character) {
+        if (this.members.has(character)) {
+            throw new Error('Этот персонаж уже добавлен в команду.');
+        }
+        this.members.add(character);
     }
 
-    getMembers() {
-        return this.members;
+    addAll(...characters) {
+        characters.forEach(character => this.members.add(character));
+    }
+
+    toArray() {
+        return Array.from(this.members);
     }
 }
-
-module.exports = { Team, Member };

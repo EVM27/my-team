@@ -1,24 +1,28 @@
 
-import { Team, Member } from '../src/Team';
+import Team from '../src/Team';
+import Character from '../src/Character';
 
-describe('Team', () => {
-    let team;
+test('добавление персонажа в команду', () => {
+    const team = new Team();
+    const character = new Character('Hero');
 
-    beforeEach(() => {
-        team = new Team();
-    });
+    team.add(character);
+    expect(team.toArray()).toContain(character);
+});
 
-    test('should add members to the team', () => {
-        const member1 = new Member('Alice', 'Developer');
-        const member2 = new Member('Bob', 'Designer');
+test('добавление дублирующего персонажа вызывает ошибку', () => {
+    const team = new Team();
+    const character = new Character('Hero');
 
-        team.addMember(member1);
-        team.addMember(member2);
+    team.add(character);
+    expect(() => team.add(character)).toThrow('Этот персонаж уже добавлен в команду.');
+});
 
-        expect(team.getMembers()).toEqual([member1, member2]);
-    });
+test('добавление нескольких персонажей', () => {
+    const team = new Team();
+    const character1 = new Character('Hero');
+    const character2 = new Character('Villain');
 
-    test('should start with no members', () => {
-        expect(team.getMembers()).toEqual([]);
-    });
+    team.addAll(character1, character2);
+    expect(team.toArray()).toEqual(expect.arrayContaining([character1, character2]));
 });
